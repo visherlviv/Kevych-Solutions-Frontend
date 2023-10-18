@@ -1,10 +1,10 @@
 import { useState, ChangeEvent } from 'react';
 
-interface ProjectCommentFormProps {
+interface ScheduleCommentsFormProps {
     onAddComment: (comment: string) => void;
 }
 
-const ProjectCommentForm: React.FC<ProjectCommentFormProps> = ({ onAddComment }) => {
+const ScheduleCommentsForm: React.FC<ScheduleCommentsFormProps> = ({ onAddComment }) => {
     const [comment, setComment] = useState<string>('');
 
     const handleCommentChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ const ProjectCommentForm: React.FC<ProjectCommentFormProps> = ({ onAddComment })
         <div className="mt-4 flex items-baseline">
             <input
                 type="text"
-                placeholder="Add comment to project..."
+                placeholder="Add comment to schedule..."
                 className="w-full p-2 border rounded-md"
                 value={comment}
                 onChange={handleCommentChange}
@@ -37,4 +37,4 @@ const ProjectCommentForm: React.FC<ProjectCommentFormProps> = ({ onAddComment })
     );
 };
 
-export default ProjectCommentForm;
+export default ScheduleCommentsForm;

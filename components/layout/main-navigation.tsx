@@ -12,7 +12,7 @@ function MainNavigation() {
     <header className="bg-purple-700 p-4">
       <script src="https://cdn.tailwindcss.com"></script>
       <Link href='/' className="text-white text-2xl font-semibold">
-        Viktor's App
+        Viktor's train schedule admin panel
       </Link>
       <nav>
         <ul className="flex space-x-4">
@@ -25,8 +25,8 @@ function MainNavigation() {
           )}
           {session && (
             <li>
-              <Link href='/projects' className="text-white hover:text-gray-300">
-                Projects
+              <Link href='/trains' className="text-white hover:text-gray-300">
+                Trains
               </Link>
             </li>
           )}

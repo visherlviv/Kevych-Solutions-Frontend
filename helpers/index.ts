@@ -1,7 +1,6 @@
-//import { NextRouter } from 'next/router';
-
-const getAllProjects = async (): Promise<object[]> => {
-    const result = await fetch('https://nest-js-postgres.vercel.app/project', {
+const BASE_URL = 'http://localhost:3002/shop/phones'
+const getAllTrains = async (): Promise<object[]> => {
+    const result = await fetch(BASE_URL, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -9,12 +8,12 @@ const getAllProjects = async (): Promise<object[]> => {
             'access-control-allow-origin': '*',
         },
     });
-    const fetchedProjects = await result.json();
-    return fetchedProjects;
+    const fetchedSchedules = await result.json();
+    return fetchedSchedules;
 };
 
-const getProjectById = async (params: { id: string }): Promise<object[]> => {
-    const result = await fetch(`https://nest-js-postgres.vercel.app/project/${params.id}`, {
+const getTrainById = async (params: { id: string }): Promise<any> => {
+    const result = await fetch(`${BASE_URL}/${params.id}`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -22,26 +21,27 @@ const getProjectById = async (params: { id: string }): Promise<object[]> => {
             'access-control-allow-origin': '*',
         },
     });
-    const fetchedProject = await result.json();
-    return fetchedProject;
+    const fetchedSchedule = await result.json();
+    return fetchedSchedule;
 };
 
-const createProject = async ({
-    projectComments, tasks, projectName, router, setErrors
+const createTrainSchedule = async ({
+    scheduleComments, schedules, projectName, router, setErrors
 }: {
-    projectComments: any[];
-    tasks: any[];
+    scheduleComments: any[];
+    schedules: any[];
     projectName: string;
     router: any;
     setErrors: (errors: any) => void;
 }): Promise<void> => {
+    console.log('projectName', projectName)
     if (!projectName) {
         setErrors([{ message: 'Please fill name field' }]);
         return;
     }
-    const comments = JSON.stringify(projectComments);
-    const updatedTasks = JSON.stringify(tasks);
-    await fetch(`https://nest-js-postgres.vercel.app/project`, {
+    const comments = JSON.stringify(scheduleComments);
+    const updatedTasks = JSON.stringify(schedules);
+    await fetch(BASE_URL, {
         method: 'post',
         headers: {
             Accept: 'application/json',
@@ -50,30 +50,30 @@ const createProject = async ({
         },
         body: JSON.stringify({
             comment: comments,
-            tasks: updatedTasks,
+            schedules: updatedTasks,
             name: projectName,
         }),
     });
-    router.push(`/projects`);
+    router.push(`/trains`);
 };
 
-const updateProjects = async ({
-    projectComments,
-    tasks,
+const updateTrainSchedule = async ({
+    scheduleComments,
+    schedules,
     params,
     router,
 }: {
-    projectComments: string[] | null;
-    tasks: { id: number, text: string }[];
+    scheduleComments: string[] | null;
+    schedules: { id: number, text: string }[];
     params: { id: string };
     router: any;
 }): Promise<void> => {
     let comments = '[]';
-    if (projectComments) {
-        comments = JSON.stringify(projectComments);
+    if (scheduleComments) {
+        comments = JSON.stringify(scheduleComments);
     }
-    const updatedTasks = JSON.stringify(tasks);
-    await fetch(`https://nest-js-postgres.vercel.app/project/${params.id}`, {
+    const updatedTasks = JSON.stringify(schedules);
+    await fetch(`${BASE_URL}/${params.id}`, {
         method: 'put',
         headers: {
             Accept: 'application/json',
@@ -82,10 +82,21 @@ const updateProjects = async ({
         },
         body: JSON.stringify({
             comment: comments,
-            tasks: updatedTasks,
+            schedules: updatedTasks,
         }),
     });
-    router.push('/projects');
+    router.push('/trains');
 };
-
-export { createProject, getAllProjects, updateProjects, getProjectById };
+const deleteTrainSchedule = async (params: { id: string }): Promise<any> => {
+    const result = await fetch(`${BASE_URL}/${params.id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'access-control-allow-origin': '*',
+        },
+    });
+    const fetchedSchedule = await result.json();
+    return fetchedSchedule;
+};
+export { createTrainSchedule, getAllTrains, updateTrainSchedule, getTrainById, deleteTrainSchedule };

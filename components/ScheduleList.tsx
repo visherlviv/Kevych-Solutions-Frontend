@@ -4,21 +4,21 @@ interface Task {
 }
 
 interface TaskListProps {
-    tasks: Task[];
-    onDeleteTask: (taskId: number) => void;
+    schedules: Task[];
+    onDeleteSchedule: (taskId: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDeleteTask }) => {
+const TaskList: React.FC<TaskListProps> = ({ schedules, onDeleteSchedule }) => {
     return (
         <ul>
-            {tasks.map((task) => (
+            {schedules.map((task) => (
                 <li key={task.id} className="mb-4">
                     <h2 className="text-xl font-semibold mb-2">{task.text}</h2>
                     <button
                         className="bg-red-500 w-52 text-white px-4 py-2 rounded-md"
-                        onClick={() => onDeleteTask(task.id)}
+                        onClick={() => onDeleteSchedule(task.id)}
                     >
-                        Delete task
+                        Delete schedule
                     </button>
                 </li>
             ))}

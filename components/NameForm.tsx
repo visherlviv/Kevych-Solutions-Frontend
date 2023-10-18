@@ -1,11 +1,11 @@
 import { useState, ChangeEvent } from 'react';
 
-interface ProjectNameFormProps {
+interface TrainNameFormProps {
   onAddName: (name: string) => void;
   setErrors: (errors: any) => void;
 }
 
-const ProjectNameForm: React.FC<ProjectNameFormProps> = ({ onAddName, setErrors }) => {
+const TrainNameForm: React.FC<TrainNameFormProps> = ({ onAddName, setErrors }) => {
   const [name, setName] = useState<string>('');
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ const ProjectNameForm: React.FC<ProjectNameFormProps> = ({ onAddName, setErrors 
     <div className="mt-4 flex items-baseline">
       <input
         type="text"
-        placeholder="Add project name..."
+        placeholder="Add train name..."
         className="w-full p-2 border rounded-md"
         value={name}
         onChange={handleNameChange}
@@ -27,4 +27,4 @@ const ProjectNameForm: React.FC<ProjectNameFormProps> = ({ onAddName, setErrors 
   );
 };
 
-export default ProjectNameForm;
+export default TrainNameForm;

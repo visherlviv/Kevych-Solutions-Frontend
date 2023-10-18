@@ -1,20 +1,20 @@
 import { useState, ChangeEvent } from 'react';
 
-interface TaskFormProps {
+interface ScheduleDetailsFormProps {
     onAddTask: (text: string) => void;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
-    const [taskText, setTaskText] = useState<string>('');
+const ScheduleDetailsForm: React.FC<ScheduleDetailsFormProps> = ({ onAddTask }) => {
+    const [taskText, setScheduleText] = useState<string>('');
 
-    const handleTaskTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setTaskText(e.target.value);
+    const handleScheduleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setScheduleText(e.target.value);
     };
 
-    const handleAddTask = () => {
+    const handleAddSchedule = () => {
         if (taskText.trim() !== '') {
             onAddTask(taskText);
-            setTaskText('');
+            setScheduleText('');
         }
     };
 
@@ -22,14 +22,14 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
         <div className="mt-4 flex items-baseline">
             <input
                 type="text"
-                placeholder="Add task..."
+                placeholder="Add schedule..."
                 className="w-full p-2 border rounded-md"
                 value={taskText}
-                onChange={handleTaskTextChange}
+                onChange={handleScheduleTextChange}
             />
             <button
                 className="bg-green-500 w-52 text-white px-4 py-2 rounded-md mt-2 ml-5"
-                onClick={handleAddTask}
+                onClick={handleAddSchedule}
             >
                 Add
             </button>
@@ -37,4 +37,4 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
     );
 };
 
-export default TaskForm;
+export default ScheduleDetailsForm;

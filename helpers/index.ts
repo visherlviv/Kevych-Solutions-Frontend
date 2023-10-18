@@ -1,4 +1,4 @@
-const BASE_URL = 'https://kevych-solutions-frontend-tyfn-hwnk4tw4s.vercel.app/trains'
+const BASE_URL = 'https://kevych-solutions-frontend-tyfn.vercel.app/trains'
 const getAllTrains = async (): Promise<object[]> => {
     const result = await fetch(BASE_URL, {
         method: 'GET',

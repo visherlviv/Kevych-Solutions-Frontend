@@ -45,8 +45,8 @@ const Home = () => {
             <h2 className="text-xl font-semibold mb-2 mt-4">Important updates of schedules:</h2>
             <ScheduleCommentsForm onAddComment={addProjectComment} />
             <ul>
-                {scheduleComments.map((comment, index) => (
-                    <li key={index} className="mb-2">
+                {scheduleComments.map((comment, id) => (
+                    <li key={id} className="mb-2">
                         {comment}
                     </li>
                 ))}

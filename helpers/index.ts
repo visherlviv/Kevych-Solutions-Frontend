@@ -12,7 +12,7 @@ const getAllTrains = async (): Promise<object[]> => {
     return fetchedSchedules;
 };
 
-const getTrainById = async (params: { id: string }): Promise<any> => {
+const getTrainById = async (params: { id: string }): Promise<[]> => {
     const result = await fetch(`${BASE_URL}/${params.id}`, {
         method: 'GET',
         headers: {
@@ -28,15 +28,15 @@ const getTrainById = async (params: { id: string }): Promise<any> => {
 const createTrainSchedule = async ({
     scheduleComments, schedules, projectName, router, setErrors
 }: {
-    scheduleComments: any[];
-    schedules: any[];
+    scheduleComments: string[];
+    schedules: { id: number, text: string }[];
     projectName: string;
     router: any;
-    setErrors: (errors: any) => void;
+    setErrors: (errors) => void;
 }): Promise<void> => {
     console.log('projectName', projectName)
     if (!projectName) {
-        setErrors([{ message: 'Please fill name field' }]);
+        setErrors([{ message: 'Please fill name field', id: 1 }]);
         return;
     }
     const comments = JSON.stringify(scheduleComments);
@@ -87,7 +87,7 @@ const updateTrainSchedule = async ({
     });
     router.push('/trains');
 };
-const deleteTrainSchedule = async (params: { id: string }): Promise<any> => {
+const deleteTrainSchedule = async (params: { id: string }): Promise<number> => {
     const result = await fetch(`${BASE_URL}/${params.id}`, {
         method: 'DELETE',
         headers: {
